@@ -2,3 +2,6 @@
 *.idea
 Library/
 Temp/
+obj/
+*.csproj
+*.sln
