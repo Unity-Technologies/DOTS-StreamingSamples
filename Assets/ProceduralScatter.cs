@@ -5,12 +5,12 @@ using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 using UnityEngine.Assertions;
-using Random = Unity.Mathematics.Random;
 
 public struct ProceduralScatterPrefab : IBufferElementData
 {
     public Entity Prefab;
 }
+
 
 public struct ProceduralScatterTile : ISharedComponentData
 {
@@ -25,18 +25,6 @@ public struct ProceduralInstanceData
     public int            PrefabIndex;
 }
 
-/*
-public struct ProceduralScatterTileRequest : IComponentData
-{
-    public int3 Position;
-}
-
-public struct ProceduralScatterTileState : ISharedComponentData
-{
-    public int3 Position;
-}
-*/
-
 struct TempProceduralScatterPrefabTag : IComponentData
 {
     
@@ -45,13 +33,23 @@ struct TempProceduralScatterPrefabTag : IComponentData
 class ScatterStreamingSystem : JobComponentSystem
 {
     World m_StreamingWorld;
+    bool m_IsGeneratingTile = false;
+    int3 m_GeneratingTile;
+
+    NativeList<ProceduralInstanceData> m_GeneratingInstances;
+    
+    Entity m_SrcScatterPrefab;
+    Entity m_StreamingWorldScatterPrefab;
+    ComponentGroup m_ScatterPrefabQuery;
+    ComponentGroup m_StreamingInstancesQuery;
+    ComponentGroup m_UnloadInstancesQuery;
+
 
     struct GenerateTileJob : IJob
     {
         public ExclusiveEntityTransaction Transaction;
         public Entity                     ScatterPrefab;
         
-        [DeallocateOnJobCompletion]
         public NativeArray<ProceduralInstanceData> InstanceData;
 
         public void Execute()
@@ -67,18 +65,10 @@ class ScatterStreamingSystem : JobComponentSystem
                 var instanceData = InstanceData[i];
                 var instance = Transaction.Instantiate(prefabs[instanceData.PrefabIndex]);
                 Transaction.SetComponentData(instance, new Translation {Value = instanceData.Position});
-
-                if (!Transaction.HasComponent(instance, ComponentType.ReadWrite<Scale>()))
-                    Transaction.AddComponent(instance, ComponentType.ReadWrite<Scale>());
-                Transaction.SetComponentData(instance, new Scale {Value = instanceData.Scale});
+                Transaction.SetComponentData(instance, new Rotation {Value = instanceData.Rotation});
             }
         }
     }
-
-    Entity m_SrcScatterPrefab;
-    Entity m_StreamingWorldScatterPrefab;
-    ComponentGroup m_ScatterPrefabQuery;
-    ComponentGroup m_InstancesQuery;
 
     void PrepareScatterPrefab(Entity scatterPrefab)
     {
@@ -123,35 +113,59 @@ class ScatterStreamingSystem : JobComponentSystem
         entityRemapping.Dispose();
         
         m_StreamingWorld.EntityManager.RemoveComponent(m_StreamingWorld.EntityManager.UniversalGroup, typeof(TempProceduralScatterPrefabTag));
-
     }
 
-    public void GenerateTileAsync(int3 tile, Entity scatterPrefab, NativeArray<ProceduralInstanceData> instance, JobHandle dependency)
+    public bool ShouldGenerateTile
     {
+        get { return !m_IsGeneratingTile; }
+    }
+
+    //@TODO: Warn about duplicate tiles
+    public void GenerateTileAsync(int3 tile, Entity scatterPrefab, NativeList<ProceduralInstanceData> instance, JobHandle dependency)
+    {
+        if (m_IsGeneratingTile)
+            throw new System.ArgumentException("GenerateTileAsync can only be called when ShouldGenerateTile returns true");
+        
         PrepareScatterPrefab(scatterPrefab);
 
         var job = new GenerateTileJob();
         job.Transaction = m_StreamingWorld.EntityManager.BeginExclusiveEntityTransaction();
-        job.InstanceData = instance;
+        job.InstanceData = instance.AsDeferredJobArray();
         job.ScatterPrefab = m_StreamingWorldScatterPrefab;
-        
-        job.Schedule(dependency).Complete();
-        
-        m_StreamingWorld.EntityManager.EndExclusiveEntityTransaction();
-        
-        var entityRemapping = m_StreamingWorld.EntityManager.CreateEntityRemapArray(Allocator.TempJob);
-        EntityManager.MoveEntitiesFrom(m_StreamingWorld.EntityManager, m_InstancesQuery, entityRemapping);
-        entityRemapping.Dispose();
 
+        m_GeneratingInstances = instance;
+        
+        m_StreamingWorld.EntityManager.ExclusiveEntityTransactionDependency = job.Schedule(dependency);
+        m_GeneratingTile = tile;
+        m_IsGeneratingTile = true;
     }
     
     public void UnloadTile(int3 tile)
     {
-        
+        m_UnloadInstancesQuery.SetFilter(new ProceduralScatterTile { Position = tile });
+        EntityManager.DestroyEntity(m_UnloadInstancesQuery);
+        m_UnloadInstancesQuery.ResetFilter();
     }
 
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
+        if (m_IsGeneratingTile && m_StreamingWorld.EntityManager.ExclusiveEntityTransactionDependency.IsCompleted)
+        {
+            m_StreamingWorld.EntityManager.EndExclusiveEntityTransaction();
+
+            //@TODO: Move this to tile generation job
+            m_StreamingWorld.EntityManager.AddSharedComponentData(m_StreamingInstancesQuery, new ProceduralScatterTile { Position = m_GeneratingTile});
+            
+            var entityRemapping = m_StreamingWorld.EntityManager.CreateEntityRemapArray(Allocator.TempJob);
+            EntityManager.MoveEntitiesFrom(m_StreamingWorld.EntityManager, m_StreamingInstancesQuery, entityRemapping);
+            entityRemapping.Dispose();
+            
+            //@TODO: Annoying that this can't be deallocated on the job
+            m_GeneratingInstances.Dispose();
+            
+            m_IsGeneratingTile = false;
+        }
+            
         return inputDeps;
     }
 
@@ -164,61 +178,25 @@ class ScatterStreamingSystem : JobComponentSystem
             All = new[] { ComponentType.ReadOnly<TempProceduralScatterPrefabTag>() }, 
             Options = EntityArchetypeQueryOptions.IncludePrefab | EntityArchetypeQueryOptions.IncludeDisabled
         });
-        m_InstancesQuery = m_StreamingWorld.EntityManager.CreateComponentGroup(new EntityArchetypeQuery 
+        m_StreamingInstancesQuery = m_StreamingWorld.EntityManager.CreateComponentGroup(new EntityArchetypeQuery 
         { 
             None = new[] { ComponentType.ReadOnly<ProceduralScatterPrefab>() },
             Options = EntityArchetypeQueryOptions.IncludeDisabled
         });
-
+        
+        m_UnloadInstancesQuery = GetComponentGroup(new EntityArchetypeQuery 
+        { 
+            All = new[] { ComponentType.ReadOnly<ProceduralScatterTile>() }, 
+            Options = EntityArchetypeQueryOptions.IncludePrefab | EntityArchetypeQueryOptions.IncludeDisabled
+        });
+        
+        RequireForUpdate(GetComponentGroup(ComponentType.ReadOnly<ProceduralScatterPrefab>()));
     }
 
     protected override void OnDestroyManager()
     {
-        m_InstancesQuery.Dispose();
+        m_GeneratingInstances.Dispose();
+        m_StreamingInstancesQuery.Dispose();
         m_StreamingWorld.Dispose();
-    }
-}
-
-class TrivialScatterSystem : JobComponentSystem
-{
-    protected override void OnCreateManager()
-    {
-        RequireSingletonForUpdate<ProceduralScatterPrefab>();
-    }
-
-    int counter = 0;
-    
-
-    protected override JobHandle OnUpdate(JobHandle inputDeps)
-    {
-        counter++;
-        if (counter >= 10)
-        {
-            return inputDeps;
-        }
-        
-        var scatterSingletonQuery = GetComponentGroup(typeof(ProceduralScatterPrefab));
-        var scatterSingleton = scatterSingletonQuery.GetSingletonEntity();
-
-        var prefabs = EntityManager.GetBuffer<ProceduralScatterPrefab>(scatterSingleton);
-        
-        var instanceArray = new NativeArray<ProceduralInstanceData>(512, Allocator.TempJob);
-        var random = new Random(0x6E624EB7u);
-        for (int i = 0; i != instanceArray.Length; i++)
-        {
-            var instance = new ProceduralInstanceData();
-            instance.Position = new float3(counter * 10 + random.NextFloat(0, 10), 0, random.NextFloat(0, 20));
-            instance.Rotation = random.NextQuaternionRotation();
-            instance.Scale = 0.2F;
-            instance.PrefabIndex = random.NextInt(0, prefabs.Length);
-
-            instanceArray[i] = instance;
-        }
-        
-        World.GetExistingManager<ScatterStreamingSystem>().GenerateTileAsync(new int3(counter, 0, 0), scatterSingleton, instanceArray, default(JobHandle));
-
-        var blah = scatterSingletonQuery.GetSingletonEntity();
-        
-        return inputDeps;
     }
 }
