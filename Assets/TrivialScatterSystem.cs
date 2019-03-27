@@ -1,13 +1,22 @@
-﻿using UnityEngine.Assertions;
+﻿using Unity.Burst;
+using UnityEngine.Assertions;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
 
-public struct TrivialScatterSettings : IBufferElementData
+public struct TrivialScatterPrefabSettings : IBufferElementData
 {
     public float ScatterRadius;
 }
+
+/*
+public struct TrivialScatterSettings : IBufferElementData
+{
+    public float TileSize;
+}
+*/
+
 
 class TrivialScatterSystem : JobComponentSystem
 {
@@ -22,15 +31,16 @@ class TrivialScatterSystem : JobComponentSystem
     int maxDim = 10;
     float tileSize = 20;
 
+    [BurstCompile]
     struct GeneratePointCloudJob : IJob
     {
         public NativeList<ProceduralInstanceData> Instances;
         [DeallocateOnJobCompletion]
-        public NativeArray<TrivialScatterSettings> ScatterSettings;
+        public NativeArray<TrivialScatterPrefabSettings> ScatterSettings;
         public float TileSize;
         public float3 TileOffset;
 
-        int CountInstances(TrivialScatterSettings settings)
+        int CountInstances(TrivialScatterPrefabSettings settings)
         {
             var count = (int)(TileSize / settings.ScatterRadius * 2) + 1;
             return count * count;
@@ -83,14 +93,14 @@ class TrivialScatterSystem : JobComponentSystem
         job.TileSize = tileSize;
         //@TODO: Background temp job
         job.Instances = new NativeList<ProceduralInstanceData>(0, Allocator.Persistent);
-        job.ScatterSettings = new NativeArray<TrivialScatterSettings>(EntityManager.GetBuffer<TrivialScatterSettings>(scatterSingleton).AsNativeArray(), Allocator.TempJob);
+        job.ScatterSettings = new NativeArray<TrivialScatterPrefabSettings>(EntityManager.GetBuffer<TrivialScatterPrefabSettings>(scatterSingleton).AsNativeArray(), Allocator.TempJob);
 
         var genJob = job.Schedule();
         
         m_ScatterSystem.GenerateTileAsync(tile, scatterSingleton, job.Instances, genJob);
 
         // Unload
-        var unloadCounter = (counter + 55) % ( maxDim * maxDim);
+        var unloadCounter = (counter + (maxDim * maxDim / 2) + 7) % ( maxDim * maxDim);
         var unloadTile = new int3((unloadCounter % maxDim), 0, (unloadCounter / maxDim));
 
         m_ScatterSystem.UnloadTile(unloadTile);

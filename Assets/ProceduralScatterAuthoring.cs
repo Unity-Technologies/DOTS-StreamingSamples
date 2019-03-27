@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
@@ -18,17 +17,17 @@ public class ProceduralScatterAuthoring : MonoBehaviour, IConvertGameObjectToEnt
 
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
-        dstManager.AddComponents(entity, new ComponentTypes(typeof(ProceduralScatterPrefab), typeof(TrivialScatterSettings)));
+        dstManager.AddComponents(entity, new ComponentTypes(typeof(ProceduralScatterPrefab), typeof(TrivialScatterPrefabSettings)));
         
         var scatterBuffer = dstManager.GetBuffer<ProceduralScatterPrefab>(entity);
-        var scatterSettings = dstManager.GetBuffer<TrivialScatterSettings>(entity);
+        var scatterSettings = dstManager.GetBuffer<TrivialScatterPrefabSettings>(entity);
 
         for (int i = 0; i != Prefabs.Length; i++)
         {
             var prefabEntity = conversionSystem.GetPrimaryEntity(Prefabs[i].Prefab);
             scatterBuffer.Add(new ProceduralScatterPrefab { Prefab = prefabEntity});
             
-            scatterSettings.Add(new TrivialScatterSettings { ScatterRadius = Prefabs[i].ScatterRadius});
+            scatterSettings.Add(new TrivialScatterPrefabSettings { ScatterRadius = Prefabs[i].ScatterRadius});
         }
     }
 
