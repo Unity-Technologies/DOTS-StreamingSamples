@@ -47,9 +47,9 @@ class ScatterStreamingSystem : JobComponentSystem
     }
 
     Stream m_Stream;
-    ComponentGroup m_ScatterPrefabQuery;
-    ComponentGroup m_StreamingInstancesQuery;
-    ComponentGroup m_UnloadInstancesQuery;
+    EntityQuery m_ScatterPrefabQuery;
+    EntityQuery m_StreamingInstancesQuery;
+    EntityQuery m_UnloadInstancesQuery;
 
     struct GenerateTileJob : IJob
     {
@@ -116,7 +116,7 @@ class ScatterStreamingSystem : JobComponentSystem
             
         entityRemapping.Dispose();
         
-        stream.StreamingWorld.EntityManager.RemoveComponent(stream.StreamingWorld.EntityManager.UniversalGroup, typeof(TempProceduralScatterPrefabTag));
+        stream.StreamingWorld.EntityManager.RemoveComponent(stream.StreamingWorld.EntityManager.UniversalQuery, typeof(TempProceduralScatterPrefabTag));
     }
 
     public bool ShouldGenerateTile
@@ -146,7 +146,7 @@ class ScatterStreamingSystem : JobComponentSystem
     
     public void UnloadTile(int3 tile)
     {
-        m_UnloadInstancesQuery.SetFilter(new ProceduralScatterTile { Position = tile });
+        m_UnloadInstancesQuery.SetSharedComponentFilter(new ProceduralScatterTile { Position = tile });
         EntityManager.DestroyEntity(m_UnloadInstancesQuery);
         m_UnloadInstancesQuery.ResetFilter();
     }
@@ -177,24 +177,24 @@ class ScatterStreamingSystem : JobComponentSystem
     {       
         m_Stream.StreamingWorld = new World("StreamingWorld");
 
-        m_ScatterPrefabQuery = GetComponentGroup(new EntityArchetypeQuery 
+        m_ScatterPrefabQuery = GetEntityQuery(new EntityQueryDesc 
         { 
             All = new[] { ComponentType.ReadOnly<TempProceduralScatterPrefabTag>() }, 
-            Options = EntityArchetypeQueryOptions.IncludePrefab | EntityArchetypeQueryOptions.IncludeDisabled
+            Options = EntityQueryOptions.IncludePrefab | EntityQueryOptions.IncludeDisabled
         });
-        m_StreamingInstancesQuery = m_Stream.StreamingWorld.EntityManager.CreateComponentGroup(new EntityArchetypeQuery 
+        m_StreamingInstancesQuery = m_Stream.StreamingWorld.EntityManager.CreateEntityQuery(new EntityQueryDesc 
         { 
             None = new[] { ComponentType.ReadOnly<ProceduralScatterPrefab>() },
-            Options = EntityArchetypeQueryOptions.IncludeDisabled
+            Options = EntityQueryOptions.IncludeDisabled
         });
         
-        m_UnloadInstancesQuery = GetComponentGroup(new EntityArchetypeQuery 
+        m_UnloadInstancesQuery = GetEntityQuery(new EntityQueryDesc 
         { 
             All = new[] { ComponentType.ReadOnly<ProceduralScatterTile>() }, 
-            Options = EntityArchetypeQueryOptions.IncludePrefab | EntityArchetypeQueryOptions.IncludeDisabled
+            Options = EntityQueryOptions.IncludePrefab | EntityQueryOptions.IncludeDisabled
         });
         
-        RequireForUpdate(GetComponentGroup(ComponentType.ReadOnly<ProceduralScatterPrefab>()));
+        RequireForUpdate(GetEntityQuery(ComponentType.ReadOnly<ProceduralScatterPrefab>()));
     }
 
     protected override void OnDestroyManager()

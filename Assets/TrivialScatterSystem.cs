@@ -24,7 +24,7 @@ class TrivialScatterSystem : JobComponentSystem
     protected override void OnCreateManager()
     {
         RequireSingletonForUpdate<ProceduralScatterPrefab>();
-        m_ScatterSystem = World.GetExistingManager<ScatterStreamingSystem>();
+        m_ScatterSystem = World.GetExistingSystem<ScatterStreamingSystem>();
     }
 
     int counter = 0;
@@ -83,7 +83,7 @@ class TrivialScatterSystem : JobComponentSystem
         if (!m_ScatterSystem.ShouldGenerateTile)
             return inputDeps;
 
-        var scatterSingletonQuery = GetComponentGroup(typeof(ProceduralScatterPrefab));
+        var scatterSingletonQuery = GetEntityQuery(typeof(ProceduralScatterPrefab));
         var scatterSingleton = scatterSingletonQuery.GetSingletonEntity();        
         
         var tile = new int3((counter % maxDim), 0, (counter / maxDim));
