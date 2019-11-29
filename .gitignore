@@ -5,3 +5,6 @@ Temp/
 obj/
 *.csproj
 *.sln
+Assets/SceneDependencyCache/*
+Assets/SceneDependencyCache.meta
+Logs/Packages-Update.log
