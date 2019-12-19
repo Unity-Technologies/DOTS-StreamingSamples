@@ -323,7 +323,7 @@ MonoBehaviour:
       z: 0
   - Prefab: {fileID: 5320480664529098162, guid: ba3d56d468b8c4a44a3a5f0a5e9b2ff5,
       type: 3}
-    ScatterRadius: 1
+    ScatterRadius: 2
     PlacementOffset:
       x: 0
       y: 0

@@ -151,8 +151,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Config:
-    DistanceForStreamingIn: 50
-    DistanceForStreamingOut: 90
+    DistanceForStreamingIn: 30
+    DistanceForStreamingOut: 50
 --- !u!4 &1772847453
 Transform:
   m_ObjectHideFlags: 0

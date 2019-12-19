@@ -230,7 +230,7 @@ class ScatterStreamingSystem : JobComponentSystem
             //@TODO: Move this to tile generation job
             
             //@TODO: Need some allocation scheme for FrozenRenderSceneTag to avoid conflicts...
-            var tileGUID = new Unity.Entities.Hash128(0U, (uint) m_Stream.Tile.x, (uint) m_Stream.Tile.y, (uint) m_Stream.Tile.z);
+            var tileGUID = new Unity.Entities.Hash128(1U, (uint) m_Stream.Tile.x, (uint) m_Stream.Tile.y, (uint) m_Stream.Tile.z);
             m_Stream.StreamingWorld.EntityManager.AddSharedComponentData(m_MarkStaticFrozen, new FrozenRenderSceneTag() { SceneGUID = tileGUID});
             m_Stream.StreamingWorld.EntityManager.AddSharedComponentData(m_StreamingInstancesQuery, new ProceduralScatterTile { TileEntity = m_Stream.TileEntity });
             
@@ -239,6 +239,8 @@ class ScatterStreamingSystem : JobComponentSystem
             entityRemapping.Dispose();
             
             m_Stream.IsGeneratingTile = false;
+
+            //Debug.Log($"Moved Tile: {tileGUID}");
         }
             
         return inputDeps;
