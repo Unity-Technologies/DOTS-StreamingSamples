@@ -279,7 +279,15 @@ class RoomSetSystem : SystemBase
         EntityManager.RemoveComponent<RoomSetGeneratedTag>(m_CleanupGenerationQuery);
 
         // Are we still waiting on some meta data to load?
-        if (!m_LoadPending.IsEmptyIgnoreFilter)
+        bool allMetadataLoaded = true;
+        Entities.WithoutBurst().WithAll<RoomSetSystemMetaTag>().ForEach(
+            (Entity sceneEntity, in SceneReference sceneReference, in DynamicBuffer<ResolvedSectionEntity> sectionEntities) =>
+            {
+                if (sectionEntities.Length == 0)
+                    allMetadataLoaded = false;
+            }).Run();
+
+        if (!allMetadataLoaded)
             return;
 
         var generationCount = m_RequestedGenerationQuery.CalculateEntityCount();
