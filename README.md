@@ -1,3 +1,18 @@
+There are submodules contained in this repository. Run the following before opening the Unity project (EnvTestProject)
+
+git submodule sync --recursive
+git submodule update --init --recursive
+Note: The --init argument for git submodule update is only needed if this is your first time opening the project on the machine. In subsequent runs, git submodule update --recursive should be sufficient.
+
+This project contains large assets that requires to install git Large File Storage:
+Download and run the installer on your machine then run the following command:
+
+git lfs install
+
+
+
+
+
 # DOTS-ProceduralTileStreamingSample
 
 Illustrates how to stream in & out tiles of prefab instances procedurally
