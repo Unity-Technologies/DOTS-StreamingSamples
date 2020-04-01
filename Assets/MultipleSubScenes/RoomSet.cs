@@ -56,7 +56,7 @@ public class RoomSet : MonoBehaviour
         }
     }
 
-    public void RequestGeneration(GUID guid)
+    public void RequestGeneration(GUID guid, DungeonTiles dungeonTiles)
     {
         CleanupGeneration();
 
@@ -66,6 +66,10 @@ public class RoomSet : MonoBehaviour
                 continue;
 
             var generationEntity = world.EntityManager.CreateEntity(ComponentType.ReadWrite<RoomSetRequestGeneration>());
+
+            var requestGeneration = new RoomSetRequestGeneration {TileSize = dungeonTiles.TileSize};
+            world.EntityManager.SetComponentData(generationEntity, requestGeneration);
+
             GenerationEntities[world] = generationEntity;
             var sceneSystem = world.GetExistingSystem<SceneSystem>();
             if (sceneSystem == null)
@@ -141,7 +145,8 @@ public class RoomSetEditor : EditorWindow
         CloseRoom();
         _LastEditScene = EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(room), OpenSceneMode.Additive);
 
-        _roomSet.RequestGeneration(new GUID(AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(room))));
+        var guid = new GUID(AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(room)));
+        _roomSet.RequestGeneration(guid, _TileSet);
     }
 
     void CloseRoom()
@@ -189,7 +194,7 @@ struct RoomSetTileTag : IComponentData
 
 struct RoomSetRequestGeneration : IComponentData
 {
-    //public int HalfSize;
+    public float TileSize;
 }
 
 struct RoomSetGeneratedTag : ISystemStateComponentData
@@ -321,13 +326,13 @@ class RoomSetSystem : SystemBase
             }).Run();
 
         var generationEntities = m_RequestedGenerationQuery.ToEntityArray(Allocator.TempJob);
-        //var generationParams = m_RequestedGenerationQuery.ToComponentDataArray<RoomSetRequestGeneration>(Allocator.TempJob);
+        var generationParams = m_RequestedGenerationQuery.ToComponentDataArray<RoomSetRequestGeneration>(Allocator.TempJob);
         EntityManager.AddComponent<RoomSetGeneratedTag>(m_RequestedGenerationQuery);
 
         for (int genIndex = 0; genIndex < generationCount; ++genIndex)
         {
             var generationEntity = generationEntities[genIndex];
-            //var generationParam = generationParams[genIndex];
+            var generationParam = generationParams[genIndex];
 
             var group = new RoomSetGenerationGroup {Group = generationEntity};
 
@@ -404,7 +409,7 @@ class RoomSetSystem : SystemBase
 
                     var sceneOffset = new SubSceneOffset
                     {
-                        Translation = new float3(x, 0, z) * 3,
+                        Translation = new float3(x, 0, z) * generationParam.TileSize,
                         RotationInQuadrants = connectivityToSceneEntity[maze[index]].Item2,
                     };
 
