@@ -56,7 +56,7 @@ public class RoomSet : MonoBehaviour
         }
     }
 
-    public void RequestGeneration()
+    public void RequestGeneration(GUID guid)
     {
         CleanupGeneration();
 
@@ -65,8 +65,18 @@ public class RoomSet : MonoBehaviour
             if (world.GetExistingSystem<RoomSetSystem>() == null)
                 continue;
 
-            var entity = world.EntityManager.CreateEntity(ComponentType.ReadWrite<RoomSetRequestGeneration>());
-            GenerationEntities[world] = entity;
+            var generationEntity = world.EntityManager.CreateEntity(ComponentType.ReadWrite<RoomSetRequestGeneration>());
+            GenerationEntities[world] = generationEntity;
+            var sceneSystem = world.GetExistingSystem<SceneSystem>();
+            if (sceneSystem == null)
+                continue;
+
+            var sceneEntity = sceneSystem.LoadSceneAsync(guid, new SceneSystem.LoadParameters
+            {
+                Flags = SceneLoadFlags.NewInstance
+            });
+            world.EntityManager.AddComponent<RoomSetTileTag>(sceneEntity);
+            world.EntityManager.AddSharedComponentData(sceneEntity, new RoomSetGenerationGroup {Group = generationEntity});
         }
     }
 
@@ -131,7 +141,7 @@ public class RoomSetEditor : EditorWindow
         CloseRoom();
         _LastEditScene = EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(room), OpenSceneMode.Additive);
 
-        _roomSet.RequestGeneration();
+        _roomSet.RequestGeneration(new GUID(AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(room))));
     }
 
     void CloseRoom()
