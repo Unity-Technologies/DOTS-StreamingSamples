@@ -4,6 +4,8 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
+using UnityEngine;
+using Random = Unity.Mathematics.Random;
 
 public struct TrivialScatterPrefabSettings : IBufferElementData
 {
@@ -11,6 +13,8 @@ public struct TrivialScatterPrefabSettings : IBufferElementData
     public float3 PlacementOffset;
 }
 
+[AlwaysSynchronizeSystem]
+[ExecuteAlways]
 class TrivialScatterSystem : JobComponentSystem
 {
     ScatterStreamingSystem m_ScatterSystem;
@@ -19,10 +23,6 @@ class TrivialScatterSystem : JobComponentSystem
         RequireSingletonForUpdate<ProceduralScatterPrefab>();
         m_ScatterSystem = World.GetExistingSystem<ScatterStreamingSystem>();
     }
-
-    int _Counter = 0;
-    int _MaxDim = 10;
-    float _TileSize = 20;
 
     [BurstCompile]
     struct GeneratePointCloudJob : IJob
@@ -70,42 +70,41 @@ class TrivialScatterSystem : JobComponentSystem
         }
     }
 
+    struct LoadedState : ISystemStateComponentData
+    {
+        
+    }
+
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
-        if (!m_ScatterSystem.ShouldGenerateTile)
-            return inputDeps;
-
-        var scatterSingletonQuery = GetEntityQuery(typeof(ProceduralScatterPrefab));
-        var scatterSingleton = scatterSingletonQuery.GetSingletonEntity();        
-
-        // Unload
+        if (m_ScatterSystem.ShouldGenerateTile)
         {
-            var unloadCounter = (_Counter + (_MaxDim * _MaxDim / 2) + 7) % ( _MaxDim * _MaxDim);
-            var unloadTile = new int3((unloadCounter % _MaxDim), 0, (unloadCounter / _MaxDim));
+            Entities.WithStructuralChanges().WithAll<RequestLoaded>().WithNone<LoadedState>().ForEach((Entity tileEntity, in ProceduralTileMeta tile) =>
+            {
+                if (!m_ScatterSystem.ShouldGenerateTile)
+                    return;
+                
+                var scatterSettings = EntityManager.GetBuffer<TrivialScatterPrefabSettings>(tile.PrefabSet);
+                
+                var job = new GeneratePointCloudJob();
+                job.TileOffset = (float3)tile.Location * tile.TileSize;
+                job.TileSize = tile.TileSize;
+                job.Instances = new NativeList<ProceduralInstanceData>(0, Allocator.TempJob);
+                job.ScatterSettings = new NativeArray<TrivialScatterPrefabSettings>(scatterSettings.AsNativeArray(), Allocator.TempJob);
 
-            m_ScatterSystem.UnloadTile(unloadTile, scatterSingleton);
+                var genJob = job.Schedule();
+                m_ScatterSystem.GenerateTileAsync(tile.Location, tileEntity, tile.PrefabSet, job.Instances, genJob);
+
+                EntityManager.AddComponentData(tileEntity, new LoadedState());
+            }).Run();
         }
 
-        // Generate
+        Entities.WithStructuralChanges().WithAll<LoadedState>().WithNone<RequestLoaded>().ForEach((Entity tileEntity) =>
         {
-            var tile = new int3((_Counter % _MaxDim), 0, (_Counter / _MaxDim));
+            if (m_ScatterSystem.UnloadTile(tileEntity))
+                EntityManager.RemoveComponent<LoadedState>(tileEntity);
+        }).Run();
 
-            var job = new GeneratePointCloudJob();
-            job.TileOffset = (float3)tile * _TileSize;
-            job.TileSize = _TileSize;
-            job.Instances = new NativeList<ProceduralInstanceData>(0, Allocator.TempJob);
-            job.ScatterSettings = new NativeArray<TrivialScatterPrefabSettings>(EntityManager.GetBuffer<TrivialScatterPrefabSettings>(scatterSingleton).AsNativeArray(), Allocator.TempJob);
-
-            var genJob = job.Schedule();
-            
-            m_ScatterSystem.GenerateTileAsync(tile, scatterSingleton, job.Instances, genJob);
-        }
-        
-        
-        _Counter++;
-        if (_Counter >= _MaxDim * _MaxDim)
-            _Counter = 0;
-
-        return inputDeps;
+        return default;
     }
 }

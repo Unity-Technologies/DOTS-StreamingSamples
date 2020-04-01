@@ -43,6 +43,7 @@ MonoBehaviour:
     m_BevelRadius: 0.05
     m_MinimumAngle: 2.5000002
   m_CustomMesh: {fileID: 0}
+  m_ForceUnique: 0
   m_Material:
     m_SupportsTemplate: 1
     m_Template: {fileID: 0}
@@ -72,6 +73,18 @@ MonoBehaviour:
       m_Override: 0
       m_Value: 0000000000000000
   m_ConvexRadius_Deprecated: -1
+--- !u!114 &4840742033921430568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5320480664529098162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af892e4287c1f436baf5a5063049521a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5320480664529064722
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81,7 +94,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100000, guid: 40eee6d5f6f994c478afdb774a87c9b1, type: 3}
       propertyPath: m_Name
-      value: static-rock 1
+      value: static-rock
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 40eee6d5f6f994c478afdb774a87c9b1, type: 3}
       propertyPath: m_LocalPosition.x
