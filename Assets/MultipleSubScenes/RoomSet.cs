@@ -278,11 +278,12 @@ class RoomSetSystem : SystemBase
 
         EntityManager.RemoveComponent<RoomSetGeneratedTag>(m_CleanupGenerationQuery);
 
-        if (!HasSingleton<RoomSetRequestGeneration>())
-            return;
-
         // Are we still waiting on some meta data to load?
         if (!m_LoadPending.IsEmptyIgnoreFilter)
+            return;
+
+        var generationCount = m_RequestedGenerationQuery.CalculateEntityCount();
+        if (generationCount == 0)
             return;
 
         var connectivityToSceneEntity = new NativeArray<ValueTuple<Entity, int>>(16, Allocator.Temp);
@@ -311,16 +312,15 @@ class RoomSetSystem : SystemBase
                 }
             }).Run();
 
-        var generationCount = m_RequestedGenerationQuery.CalculateEntityCount();
         var generationEntities = m_RequestedGenerationQuery.ToEntityArray(Allocator.TempJob);
         //var generationParams = m_RequestedGenerationQuery.ToComponentDataArray<RoomSetRequestGeneration>(Allocator.TempJob);
+        EntityManager.AddComponent<RoomSetGeneratedTag>(m_RequestedGenerationQuery);
 
         for (int genIndex = 0; genIndex < generationCount; ++genIndex)
         {
             var generationEntity = generationEntities[genIndex];
             //var generationParam = generationParams[genIndex];
 
-            EntityManager.AddComponent<RoomSetGeneratedTag>(generationEntity);
             var group = new RoomSetGenerationGroup {Group = generationEntity};
 
             const int RING = 2;
