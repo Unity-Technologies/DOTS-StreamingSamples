@@ -1,0 +1,93 @@
+* text=auto eol=lf
+
+# EOL
+
+*.py eol=lf
+*.pl eol=lf
+*.pm eol=lf
+*.t eol=lf
+*.it eol=lf
+*.h eol=lf
+*.cpp eol=lf
+*.cs eol=lf
+*.c eol=lf
+*.txt eol=lf
+*.bindings eol=lf
+*.sh eol=lf
+*.jam eol=lf
+*.as eol=lf
+*.boo eol=lf
+*.java eol=lf
+*.js eol=lf
+Makefile eol=lf
+*.shader eol=lf
+*.cginc eol=lf
+*.glslinc eol=lf
+*.meta eol=lf
+*.mm eol=lf
+*.md eol=lf
+
+# vs can handle these as lf, but really wants them as crlf
+*.vcproj eol=crlf
+*.vcxproj eol=crlf
+*.vcxproj.filters eol=crlf
+*.csproj eol=crlf
+*.props eol=crlf
+*.targets eol=crlf
+*.sln eol=crlf
+*.sln.template eol=crlf
+*.bat eol=crlf
+*.cmd eol=crlf
+*.xaml eol=crlf
+
+
+# LFS
+
+**/moz-cjpeg filter=lfs diff=lfs merge=lfs -text
+**/pngcrush filter=lfs diff=lfs merge=lfs -text
+**/cwebp filter=lfs diff=lfs merge=lfs -text
+
+*.anim filter=lfs diff=lfs merge=lfs -text
+*.blend filter=lfs diff=lfs merge=lfs -text
+*.bundle filter=lfs diff=lfs merge=lfs -text
+*.cube filter=lfs diff=lfs merge=lfs -text
+*.entities filter=lfs diff=lfs merge=lfs -text
+*.entityheader filter=lfs diff=lfs merge=lfs -text
+*.unitypackage filter=lfs diff=lfs merge=lfs -text
+
+# archives and well-known binary formats
+*.[zZ][iI][pP] filter=lfs diff=lfs merge=lfs -text
+*.7[zZ] filter=lfs diff=lfs merge=lfs -text
+*.[zZ]7 filter=lfs diff=lfs merge=lfs -text
+*.[tT][gG][zZ] filter=lfs diff=lfs merge=lfs -text
+*.[gG][zZ] filter=lfs diff=lfs merge=lfs -text
+
+*.[aA][iI][fF] filter=lfs diff=lfs merge=lfs -text
+*.[dD][aA][tT] filter=lfs diff=lfs merge=lfs -text
+*.[eE][xX][rR] filter=lfs diff=lfs merge=lfs -text
+*.[fF][bB][xX] filter=lfs diff=lfs merge=lfs -text
+*.[gG][iI][fF] filter=lfs diff=lfs merge=lfs -text
+*.[jJ][pP][gG] filter=lfs diff=lfs merge=lfs -text
+*.[mM][pP][34] filter=lfs diff=lfs merge=lfs -text
+*.[mM]4[aA] filter=lfs diff=lfs merge=lfs -text
+*.[oO][gG][gG] filter=lfs diff=lfs merge=lfs -text
+*.[pP][nN][gG] filter=lfs diff=lfs merge=lfs -text
+*.[pP][dD][fF] filter=lfs diff=lfs merge=lfs -text
+*.[pP][sS][dD] filter=lfs diff=lfs merge=lfs -text
+*.[rR][aA][wW] filter=lfs diff=lfs merge=lfs -text
+*.[tT][gG][aA] filter=lfs diff=lfs merge=lfs -text
+*.[tT][iI][fF] filter=lfs diff=lfs merge=lfs -text
+*.[tT][tT][fF] filter=lfs diff=lfs merge=lfs -text
+*.[wW][aA][vV] filter=lfs diff=lfs merge=lfs -text
+
+# executables and libraries
+*.[aA] filter=lfs diff=lfs merge=lfs -text
+*.[bB][iI][nN] filter=lfs diff=lfs merge=lfs -text
+*.[dD][lL][lL] filter=lfs diff=lfs merge=lfs -text
+*.[dD][yY][lL][iI][bB] filter=lfs diff=lfs merge=lfs -text
+*.[eE][xX][eE] filter=lfs diff=lfs merge=lfs -text
+*.[lL][iI][bB] filter=lfs diff=lfs merge=lfs -text
+*.[oO] filter=lfs diff=lfs merge=lfs -text
+*.[oO][bB][jJ] filter=lfs diff=lfs merge=lfs -text
+*.[pP][dD][bB] filter=lfs diff=lfs merge=lfs -text
+*.[sS][oO] filter=lfs diff=lfs merge=lfs -text
