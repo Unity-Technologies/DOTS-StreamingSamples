@@ -1,0 +1,145 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2686e09ec7aef44bad2843e4416f057, type: 3}
+  m_Name: Spotlight_Tunnel_Diffusion Profile Settings_Profile 1
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  profiles:
+  - scatteringDistance: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    transmissionTint: {r: 1, g: 1, b: 1, a: 1}
+    texturingMode: 0
+    transmissionMode: 1
+    thicknessRemap: {x: 0, y: 5}
+    worldScale: 1
+    ior: 1.4
+    hash: 1081419640
+  - scatteringDistance: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    transmissionTint: {r: 1, g: 1, b: 1, a: 1}
+    texturingMode: 0
+    transmissionMode: 1
+    thicknessRemap: {x: 0, y: 5}
+    worldScale: 1
+    ior: 1.4
+    hash: 1079790639
+  - scatteringDistance: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    transmissionTint: {r: 1, g: 1, b: 1, a: 1}
+    texturingMode: 0
+    transmissionMode: 1
+    thicknessRemap: {x: 0, y: 5}
+    worldScale: 1
+    ior: 1.4
+    hash: 1080146451
+  - scatteringDistance: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    transmissionTint: {r: 1, g: 1, b: 1, a: 1}
+    texturingMode: 0
+    transmissionMode: 1
+    thicknessRemap: {x: 0, y: 5}
+    worldScale: 1
+    ior: 1.4
+    hash: 1080974540
+  - scatteringDistance: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    transmissionTint: {r: 1, g: 1, b: 1, a: 1}
+    texturingMode: 0
+    transmissionMode: 1
+    thicknessRemap: {x: 0, y: 5}
+    worldScale: 1
+    ior: 1.4
+    hash: 1077024277
+  - scatteringDistance: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    transmissionTint: {r: 1, g: 1, b: 1, a: 1}
+    texturingMode: 0
+    transmissionMode: 1
+    thicknessRemap: {x: 0, y: 5}
+    worldScale: 1
+    ior: 1.4
+    hash: 1078744877
+  - scatteringDistance: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    transmissionTint: {r: 1, g: 1, b: 1, a: 1}
+    texturingMode: 0
+    transmissionMode: 1
+    thicknessRemap: {x: 0, y: 5}
+    worldScale: 1
+    ior: 1.4
+    hash: 1080204027
+  - scatteringDistance: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    transmissionTint: {r: 1, g: 1, b: 1, a: 1}
+    texturingMode: 0
+    transmissionMode: 1
+    thicknessRemap: {x: 0, y: 5}
+    worldScale: 1
+    ior: 1.4
+    hash: 1081760534
+  - scatteringDistance: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    transmissionTint: {r: 1, g: 1, b: 1, a: 1}
+    texturingMode: 0
+    transmissionMode: 1
+    thicknessRemap: {x: 0, y: 5}
+    worldScale: 1
+    ior: 1.4
+    hash: 1074030885
+  - scatteringDistance: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    transmissionTint: {r: 1, g: 1, b: 1, a: 1}
+    texturingMode: 0
+    transmissionMode: 1
+    thicknessRemap: {x: 0, y: 5}
+    worldScale: 1
+    ior: 1.4
+    hash: 1074271775
+  - scatteringDistance: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    transmissionTint: {r: 1, g: 1, b: 1, a: 1}
+    texturingMode: 0
+    transmissionMode: 1
+    thicknessRemap: {x: 0, y: 5}
+    worldScale: 1
+    ior: 1.4
+    hash: 1078676181
+  - scatteringDistance: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    transmissionTint: {r: 1, g: 1, b: 1, a: 1}
+    texturingMode: 0
+    transmissionMode: 1
+    thicknessRemap: {x: 0, y: 5}
+    worldScale: 1
+    ior: 1.4
+    hash: 1078856165
+  - scatteringDistance: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    transmissionTint: {r: 1, g: 1, b: 1, a: 1}
+    texturingMode: 0
+    transmissionMode: 1
+    thicknessRemap: {x: 0, y: 5}
+    worldScale: 1
+    ior: 1.4
+    hash: 1075667088
+  - scatteringDistance: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    transmissionTint: {r: 1, g: 1, b: 1, a: 1}
+    texturingMode: 0
+    transmissionMode: 1
+    thicknessRemap: {x: 0, y: 5}
+    worldScale: 1
+    ior: 1.4
+    hash: 1074985632
+  - scatteringDistance: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    transmissionTint: {r: 1, g: 1, b: 1, a: 1}
+    texturingMode: 0
+    transmissionMode: 1
+    thicknessRemap: {x: 0, y: 5}
+    worldScale: 1
+    ior: 1.4
+    hash: 1081528291
+  profile:
+    scatteringDistance: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    transmissionTint: {r: 1, g: 1, b: 1, a: 1}
+    texturingMode: 0
+    transmissionMode: 1
+    thicknessRemap: {x: 0, y: 5}
+    worldScale: 1
+    ior: 1.4
+    hash: 1081419640
