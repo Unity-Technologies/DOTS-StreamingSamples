@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.unity.animation": "0.3.0-preview.9",
     "com.unity.collections": "file:../dots/Samples/Packages/com.unity.collections",
     "com.unity.entities": "file:../dots/Samples/Packages/com.unity.entities",
     "com.unity.ide.rider": "1.2.1",
