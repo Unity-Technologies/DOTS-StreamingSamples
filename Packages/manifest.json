@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.unity.burst": "1.3.0-preview.8",
     "com.unity.collections": "file:../dots/Samples/Packages/com.unity.collections",
     "com.unity.entities": "file:../dots/Samples/Packages/com.unity.entities",
     "com.unity.ide.rider": "1.2.1",

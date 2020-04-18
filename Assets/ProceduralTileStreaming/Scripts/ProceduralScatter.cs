@@ -201,7 +201,8 @@ class ScatterStreamingSystem : JobComponentSystem
         dependency = job.Schedule(dependency);
         dependency = instance.Dispose(dependency);
 
-        m_Stream.StreamingWorld.EntityManager.ExclusiveEntityTransactionDependency = dependency;
+        var entityManager = m_Stream.StreamingWorld.EntityManager;
+        entityManager.ExclusiveEntityTransactionDependency = dependency;
         m_Stream.Tile = tile;
         m_Stream.TileEntity = tileEntity;
         m_Stream.IsGeneratingTile = true;
