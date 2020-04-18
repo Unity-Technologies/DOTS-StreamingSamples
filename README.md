@@ -18,9 +18,9 @@ git lfs install
 Illustrates how to stream in & out tiles of prefab instances procedurally
 
 The basic functionality works, performance is at a reasonable starting point @ 60 FPS on a Macbook Pro.
-* 30.000 instances get continously created & destroyed in tiles 
-  * Tree (static convex collider + 2 material renderer), 
-  * Rock (static convex collider + 1 material renderer), 
+* 30.000 instances get continously created & destroyed in tiles
+  * Tree (static convex collider + 2 material renderer),
+  * Rock (static convex collider + 1 material renderer),
   * Dynamic rock falling (dynamic physics body with convex collider + 1 material renderer)
 
 
