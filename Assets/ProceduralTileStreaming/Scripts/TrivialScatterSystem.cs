@@ -1,4 +1,4 @@
-﻿using Unity.Burst;
+using Unity.Burst;
 using UnityEngine.Assertions;
 using Unity.Collections;
 using Unity.Entities;
@@ -64,7 +64,6 @@ class TrivialScatterSystem : JobComponentSystem
 
                     instancesArray[outputIndex++] = instance;
                 }
-
             }
             Assert.AreEqual(instancesArray.Length, outputIndex);
         }
@@ -72,7 +71,6 @@ class TrivialScatterSystem : JobComponentSystem
 
     struct LoadedState : ISystemStateComponentData
     {
-        
     }
 
     protected override JobHandle OnUpdate(JobHandle inputDeps)
@@ -83,9 +81,9 @@ class TrivialScatterSystem : JobComponentSystem
             {
                 if (!m_ScatterSystem.ShouldGenerateTile)
                     return;
-                
+
                 var scatterSettings = EntityManager.GetBuffer<TrivialScatterPrefabSettings>(tile.PrefabSet);
-                
+
                 var job = new GeneratePointCloudJob();
                 job.TileOffset = (float3)tile.Location * tile.TileSize;
                 job.TileSize = tile.TileSize;

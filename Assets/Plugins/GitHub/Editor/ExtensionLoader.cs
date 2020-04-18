@@ -56,7 +56,6 @@ namespace GitHub.Unity
                 //ExtensionLoader.instance.Initialized = true;
                 AssetDatabase.SaveAssets();
             }
-
         }
 
         private static void ToggleAssemblies()

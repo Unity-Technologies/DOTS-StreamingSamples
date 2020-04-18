@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -18,7 +18,6 @@ struct ProceduralTileBoundingVolume : IComponentData
 
 struct RequestLoaded : IComponentData
 {
-    
 }
 
 [RequiresEntityConversion]
@@ -41,7 +40,7 @@ public class ProceduralScatterAuthoring : MonoBehaviour, IConvertGameObjectToEnt
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
         dstManager.AddComponents(entity, new ComponentTypes(typeof(ProceduralScatterPrefab), typeof(TrivialScatterPrefabSettings)));
-        
+
         var scatterBuffer = dstManager.GetBuffer<ProceduralScatterPrefab>(entity);
         var scatterSettings = dstManager.GetBuffer<TrivialScatterPrefabSettings>(entity);
 
@@ -49,12 +48,12 @@ public class ProceduralScatterAuthoring : MonoBehaviour, IConvertGameObjectToEnt
         {
             var prefabEntity = conversionSystem.GetPrimaryEntity(Prefabs[i].Prefab);
             scatterBuffer.Add(new ProceduralScatterPrefab { Prefab = prefabEntity});
-            
+
             scatterSettings.Add(new TrivialScatterPrefabSettings { ScatterRadius = Prefabs[i].ScatterRadius, PlacementOffset = Prefabs[i].PlacementOffset});
         }
 
         int tileCount = (int)math.ceil(WorldSize / TileSize);
-        int maxTileCountSqrt = (int)math.round(math.sqrt((float) MaxTilesTotal));
+        int maxTileCountSqrt = (int)math.round(math.sqrt((float)MaxTilesTotal));
         tileCount = math.min(maxTileCountSqrt, tileCount);
         for (int x = 0; x != tileCount; x++)
         {
@@ -78,7 +77,7 @@ public class ProceduralScatterAuthoring : MonoBehaviour, IConvertGameObjectToEnt
 
     public void DeclareReferencedPrefabs(List<GameObject> referencedPrefabs)
     {
-        foreach(var prefab in Prefabs)
+        foreach (var prefab in Prefabs)
             referencedPrefabs.Add(prefab.Prefab);
     }
 }

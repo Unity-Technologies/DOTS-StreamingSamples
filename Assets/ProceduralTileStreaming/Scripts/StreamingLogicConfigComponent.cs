@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
@@ -47,7 +47,7 @@ public class StreamingLogicSystem : JobComponentSystem
         var config = GetSingleton<StreamingLogicConfig>();
 
         var cmd = new EntityCommandBuffer(Allocator.TempJob);
-        
+
         var request = GetComponentDataFromEntity<RequestLoaded>();
         Entities.WithStoreEntityQueryInField(ref _TileQuery).ForEach((Entity entity, in ProceduralTileBoundingVolume bounds) =>
         {
@@ -76,4 +76,3 @@ public class StreamingLogicSystem : JobComponentSystem
         RequireForUpdate(_TileQuery);
     }
 }
-
