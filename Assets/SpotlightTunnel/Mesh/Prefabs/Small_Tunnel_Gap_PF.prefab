@@ -236,7 +236,6 @@ GameObject:
   - component: {fileID: 4802077645689040}
   - component: {fileID: 33067328116072178}
   - component: {fileID: 23960224179095100}
-  - component: {fileID: 259187292857391272}
   m_Layer: 0
   m_Name: Train_Tracks_1m
   m_TagString: Untagged
@@ -307,22 +306,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!259 &259187292857391272
-LightProbeProxyVolume:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1683902301208018}
-  m_Enabled: 1
-  m_BoundingBoxMode: 0
-  m_ResolutionX: 2
-  m_ResolutionY: 1
-  m_ResolutionZ: 1
-  m_ResolutionProbesPerUnit: 0.25
-  m_BoundingBoxSize: {x: Infinity, y: Infinity, z: Infinity}
-  m_BoundingBoxOrigin: {x: 0, y: 0, z: 0}
-  m_ResolutionMode: 1
-  m_ProbePositionMode: 0
-  m_RefreshMode: 0
-  m_QualityMode: 1

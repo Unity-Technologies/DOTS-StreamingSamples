@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4752684107123286}
   - component: {fileID: 33559953343997812}
   - component: {fileID: 23870265240108018}
-  - component: {fileID: 259352888052456476}
   m_Layer: 0
   m_Name: Side_Small_Pipes_Bend
   m_TagString: Untagged
@@ -31,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4528107815475298}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &33559953343997812
 MeshFilter:
@@ -83,25 +82,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!259 &259352888052456476
-LightProbeProxyVolume:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1138767479515932}
-  m_Enabled: 0
-  m_BoundingBoxMode: 0
-  m_ResolutionX: 2
-  m_ResolutionY: 1
-  m_ResolutionZ: 1
-  m_ResolutionProbesPerUnit: 0.25
-  m_BoundingBoxSize: {x: Infinity, y: Infinity, z: Infinity}
-  m_BoundingBoxOrigin: {x: 0, y: 0, z: 0}
-  m_ResolutionMode: 1
-  m_ProbePositionMode: 0
-  m_RefreshMode: 0
-  m_QualityMode: 1
 --- !u!1 &1179338146237964
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +114,6 @@ Transform:
   - {fileID: 4367694363872536}
   - {fileID: 4665243053972954}
   - {fileID: 4575366103487528}
-  - {fileID: 4750224489938256}
   - {fileID: 4752684107123286}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -505,7 +484,6 @@ GameObject:
   - component: {fileID: 4575366103487528}
   - component: {fileID: 33820084087732940}
   - component: {fileID: 23746814979835120}
-  - component: {fileID: 259740077931901676}
   m_Layer: 0
   m_Name: Train_Tracks_5m_Bend
   m_TagString: Untagged
@@ -576,81 +554,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!259 &259740077931901676
-LightProbeProxyVolume:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1672966636387328}
-  m_Enabled: 0
-  m_BoundingBoxMode: 0
-  m_ResolutionX: 2
-  m_ResolutionY: 1
-  m_ResolutionZ: 1
-  m_ResolutionProbesPerUnit: 0.25
-  m_BoundingBoxSize: {x: 5.1574693, y: 3.088187, z: 0.17379777}
-  m_BoundingBoxOrigin: {x: -2.4470522, y: 0.17329168, z: 0.0868989}
-  m_ResolutionMode: 1
-  m_ProbePositionMode: 0
-  m_RefreshMode: 0
-  m_QualityMode: 1
---- !u!1 &1837474540016344
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4750224489938256}
-  - component: {fileID: 220575498922191690}
-  m_Layer: 0
-  m_Name: Light Probe Group (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 64
-  m_IsActive: 1
---- !u!4 &4750224489938256
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1837474540016344}
-  m_LocalRotation: {x: -0, y: 0.0000006332993, z: -0, w: 1}
-  m_LocalPosition: {x: -2.4999683, y: 0, z: 25}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4528107815475298}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!220 &220575498922191690
-LightProbeGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1837474540016344}
-  m_Enabled: 0
-  m_SourcePositions:
-  - {x: 1.5, y: 4, z: 1}
-  - {x: 1.5, y: 2, z: -2.5}
-  - {x: 1.5, y: -1, z: 1}
-  - {x: 1.4999999, y: -1, z: -1.4944592}
-  - {x: -2, y: 4, z: 1}
-  - {x: -1.5, y: 2, z: -3}
-  - {x: -2, y: -1, z: 1}
-  - {x: -1.4999983, y: -1, z: -2.002798}
-  - {x: 1.5, y: 0, z: 5}
-  - {x: 1.5, y: 0, z: -3}
-  - {x: -1.5, y: 0, z: -3.5}
-  - {x: -2.5, y: 0, z: 4.5}
-  - {x: -2.5, y: 2, z: 4.5}
-  - {x: 1.5, y: 2, z: 5}
-  - {x: 1.5, y: 0, z: 1}
-  - {x: -2, y: 0, z: 1}
-  - {x: -1.4999983, y: 0, z: -2.002798}
-  - {x: 1.4999999, y: 0, z: -1.4944592}
-  m_Dering: 1
