@@ -133,7 +133,7 @@ public class RoomSetEditor : EditorWindow
         // TODO - hook up _TileSet.DefaultEditingRigScene
         var rigScenePath = "Assets/MultipleSubScenes/MultipleSubScenes.unity";
         var scene = EditorSceneManager.GetSceneByPath(rigScenePath);
-        if (!scene.isLoaded)
+        if (!scene.isLoaded || _roomSet == null)
         {
             EditorSceneManager.OpenScene(rigScenePath, OpenSceneMode.Single);
             var go = new GameObject();
