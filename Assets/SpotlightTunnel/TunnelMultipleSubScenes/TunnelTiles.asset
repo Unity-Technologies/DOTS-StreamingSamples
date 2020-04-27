@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aeac3ed01cd7406f8799ecf223e7e632, type: 3}
+  m_Name: TunnelTiles
+  m_EditorClassIdentifier: 
+  DefaultEditingRigScene: {fileID: 102900000, guid: 4d1f44c710ba0b54d9f276e7d16d59e5,
+    type: 3}
+  TileSize: 50
+  SubScenes:
+  - {fileID: 102900000, guid: 38d7c5f8f7600c6439e534e21dd469d1, type: 3}
+  - {fileID: 102900000, guid: 6ec89202937d8e64c8fd27138cc487e4, type: 3}
+  - {fileID: 102900000, guid: dd28841a1e363774c89b4aacbd10db2d, type: 3}
+  - {fileID: 102900000, guid: d5756a6630893c2409008ad0a9dd8e26, type: 3}
+  - {fileID: 102900000, guid: 7abb0ac0e8813e7438ba41386a6e9355, type: 3}
+  - {fileID: 102900000, guid: bc8ba6888776c2141adaf839076fec8f, type: 3}

@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 0}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -143,7 +143,7 @@ PrefabInstance:
     - target: {fileID: 3518459015456921796, guid: e302528a9b56d7d449c130c295a748d7,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.04000002
+      value: -0.040000018
       objectReference: {fileID: 0}
     - target: {fileID: 5429539413212935855, guid: e302528a9b56d7d449c130c295a748d7,
         type: 3}
@@ -207,3 +207,25 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e302528a9b56d7d449c130c295a748d7, type: 3}
+--- !u!1 &751166909 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5429539413212935855, guid: e302528a9b56d7d449c130c295a748d7,
+    type: 3}
+  m_PrefabInstance: {fileID: 751166908}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &751166910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 751166909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d71c4f569eb429943b0badbece0661bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ConnectNorth: 1
+  ConnectSouth: 0
+  ConnectEast: 1
+  ConnectWest: 0
