@@ -130,8 +130,7 @@ public class RoomSetEditor : EditorWindow
 
     void EditRoom(SceneAsset room)
     {
-        // TODO - hook up _TileSet.DefaultEditingRigScene
-        var rigScenePath = "Assets/MultipleSubScenes/MultipleSubScenes.unity";
+        var rigScenePath = AssetDatabase.GetAssetPath(_TileSet.DefaultEditingRigScene);
         var scene = EditorSceneManager.GetSceneByPath(rigScenePath);
         if (!scene.isLoaded || _roomSet == null)
         {
@@ -141,7 +140,7 @@ public class RoomSetEditor : EditorWindow
             _roomSet = go.AddComponent<RoomSet>();
             _roomSet.LoadTileSet(_TileSet.SubScenes);
         }
-
+        
         CloseRoom();
         _LastEditScene = EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(room), OpenSceneMode.Additive);
 
@@ -422,6 +421,7 @@ class RoomSetSystem : SystemBase
                 }
             }
 
+            //generationParams.Dispose();
             generationEntities.Dispose();
         }
     }
