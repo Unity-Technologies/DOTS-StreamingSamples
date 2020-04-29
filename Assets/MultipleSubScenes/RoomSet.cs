@@ -140,7 +140,7 @@ public class RoomSetEditor : EditorWindow
             _roomSet = go.AddComponent<RoomSet>();
             _roomSet.LoadTileSet(_TileSet.SubScenes);
         }
-        
+
         CloseRoom();
         _LastEditScene = EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(room), OpenSceneMode.Additive);
 
@@ -421,7 +421,7 @@ class RoomSetSystem : SystemBase
                 }
             }
 
-            //generationParams.Dispose();
+            generationParams.Dispose();
             generationEntities.Dispose();
         }
     }
