@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d71c4f569eb429943b0badbece0661bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConnectNorth: 0
-  ConnectSouth: 1
-  ConnectEast: 1
-  ConnectWest: 0
+  ConnectNorth: 1
+  ConnectSouth: 0
+  ConnectEast: 0
+  ConnectWest: 1

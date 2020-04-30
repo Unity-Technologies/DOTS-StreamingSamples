@@ -227,5 +227,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ConnectNorth: 0
   ConnectSouth: 1
-  ConnectEast: 1
-  ConnectWest: 0
+  ConnectEast: 0
+  ConnectWest: 1
