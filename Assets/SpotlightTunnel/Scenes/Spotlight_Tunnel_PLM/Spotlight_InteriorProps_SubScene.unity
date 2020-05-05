@@ -248,7 +248,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: f1dac1e80cb61704eaef7345d7f7f135, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f1dac1e80cb61704eaef7345d7f7f135, type: 3}
       propertyPath: m_LocalPosition.x
@@ -374,6 +374,10 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 65
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: f1dac1e80cb61704eaef7345d7f7f135, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f1dac1e80cb61704eaef7345d7f7f135, type: 3}
       propertyPath: m_LocalPosition.x
       value: -12.673
@@ -442,6 +446,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: efd99e7479f614644895afebde8eabaa, type: 3}
       propertyPath: m_Name
       value: TunnelLightFixture (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: efd99e7479f614644895afebde8eabaa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: efd99e7479f614644895afebde8eabaa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -522,7 +530,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &466549000
 Transform:
   m_ObjectHideFlags: 0
@@ -1495,6 +1503,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: f1dac1e80cb61704eaef7345d7f7f135, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 65
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: f1dac1e80cb61704eaef7345d7f7f135, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: f1dac1e80cb61704eaef7345d7f7f135, type: 3}
       propertyPath: m_LocalPosition.x
