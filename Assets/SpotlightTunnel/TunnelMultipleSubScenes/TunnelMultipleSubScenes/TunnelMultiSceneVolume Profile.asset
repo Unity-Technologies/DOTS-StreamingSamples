@@ -87,6 +87,7 @@ MonoBehaviour:
   - {fileID: 2730821953102002846}
   - {fileID: -5706522463595150960}
   - {fileID: -8236504258400602318}
+  - {fileID: 4109894880571979659}
 --- !u!114 &2730821953102002846
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -174,8 +175,8 @@ MonoBehaviour:
   active: 1
   m_AdvancedMode: 0
   maxShadowDistance:
-    m_OverrideState: 0
-    m_Value: 500
+    m_OverrideState: 1
+    m_Value: 100
     min: 0
   directionalTransmissionMultiplier:
     m_OverrideState: 0
