@@ -21,11 +21,11 @@ public class SubSceneOffsetSystem : SystemBase
     protected override void OnUpdate()
     {
         var offset = GetSingleton<SubSceneOffset>();
+        var rotationOffset = quaternion.RotateY(math.PI * offset.RotationInQuadrants / 2f);
         Entities.WithNone<Parent>().ForEach((ref Translation translation) =>
         {
-            translation.Value += offset.Translation;
+            translation.Value = math.mul(rotationOffset, translation.Value) + offset.Translation;
         }).Schedule();
-        var rotationOffset = quaternion.RotateY(math.PI * offset.RotationInQuadrants / 2f);
         Entities.WithNone<Parent>().ForEach((ref Rotation rotation) =>
         {
             rotation.Value = math.normalize(math.mul(rotation.Value, rotationOffset));
