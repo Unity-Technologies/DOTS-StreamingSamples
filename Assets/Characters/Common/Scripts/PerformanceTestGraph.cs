@@ -1,5 +1,6 @@
-﻿using Unity.Entities;
+using Unity.Entities;
 using Unity.Animation;
+using Unity.Animation.Hybrid;
 using Unity.DataFlowGraph;
 using Unity.Collections;
 using UnityEngine.Assertions;
@@ -21,14 +22,14 @@ public class PerformanceTestGraph : AnimationGraphBase
 
         var clipBuffer = dstManager.AddBuffer<PerformanceSetupAsset>(entity);
         for (int i = 0; i < Clips.Length; ++i)
-            clipBuffer.Add(new PerformanceSetupAsset { Clip = ClipBuilder.AnimationClipToDenseClip(Clips[i]) });
+            clipBuffer.Add(new PerformanceSetupAsset { Clip = Clips[i].ToDenseClip() });
 
         dstManager.AddComponent<PerformanceSetup>(entity);
     }
 }
 #endif
 
-public struct PerformanceSetup : ISampleSetup { };
+public struct PerformanceSetup : ISampleSetup {};
 
 public struct PerformanceSetupAsset : IBufferElementData
 {
@@ -53,7 +54,7 @@ public class PerformanceGraphSystem : SampleSystemBase<
     PerformanceSetup,
     PerformanceData,
     PreAnimationGraphSystem
-    >
+>
 {
     static Unity.Mathematics.Random s_Random = new Unity.Mathematics.Random(0x12345678);
 

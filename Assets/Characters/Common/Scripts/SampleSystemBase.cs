@@ -1,16 +1,16 @@
-﻿using Unity.Entities;
+using Unity.Entities;
 using Unity.Animation;
 using Unity.Collections;
 using Unity.DataFlowGraph;
 
-public interface ISampleSetup : IComponentData { };
+public interface ISampleSetup : IComponentData {};
 
-public interface ISampleData : ISystemStateComponentData { };
+public interface ISampleData : ISystemStateComponentData {};
 
 public abstract class SampleSystemBase<TSampleSetup, TSampleData, TAnimationSystem> : ComponentSystem
     where TSampleSetup : struct, ISampleSetup
     where TSampleData  : struct, ISampleData
-    where TAnimationSystem  : JobComponentSystem, IAnimationSystem
+    where TAnimationSystem  : SystemBase, IAnimationSystem
 {
     protected TAnimationSystem  m_AnimationSystem;
 

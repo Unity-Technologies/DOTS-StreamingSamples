@@ -1,4 +1,4 @@
-﻿using Unity.Entities;
+using Unity.Entities;
 using Unity.Animation.Hybrid;
 using Unity.Mathematics;
 using Unity.Transforms;

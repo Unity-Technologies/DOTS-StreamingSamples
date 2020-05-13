@@ -1,4 +1,4 @@
-﻿using Unity.Entities;
+using Unity.Entities;
 using Unity.Animation;
 
 [UpdateAfter(typeof(PostAnimationSystemGroup))]
