@@ -286,6 +286,9 @@ GameObject:
   - component: {fileID: 1524013255}
   - component: {fileID: 1524013254}
   - component: {fileID: 1524013253}
+  - component: {fileID: 1524013258}
+  - component: {fileID: 1524013257}
+  - component: {fileID: 1524013259}
   m_Layer: 0
   m_Name: PlanePropertyBinded
   m_TagString: Untagged
@@ -370,6 +373,59 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &1524013257
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524013252}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!320 &1524013258
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524013252}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 753ae101db32c014abea0d1ee8cb3d1f, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 1
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -3818394873495120147, guid: 753ae101db32c014abea0d1ee8cb3d1f, type: 2}
+    value: {fileID: 1524013259}
+  m_ExposedReferences:
+    m_References: []
+--- !u!114 &1524013259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524013252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96868656dfd7e084fa4d5fe5102ed85b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TagStatic:
+    x: 1540662188
+    y: 999156700
 --- !u!1 &1784671423
 GameObject:
   m_ObjectHideFlags: 0
@@ -406,8 +462,7 @@ VFXRenderer:
   m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 0}
+  m_Materials: []
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
