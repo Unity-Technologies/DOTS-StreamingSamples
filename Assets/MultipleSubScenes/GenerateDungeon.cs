@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using UnityEditor;
 using Random = UnityEngine.Random;
@@ -18,7 +18,7 @@ public class GenerateDungeon : MonoBehaviour
 
     void Start()
     {
-        var guid = new GUID(AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(tiles.SubScenes[Random.Range(0,tiles.SubScenes.Count - 1)])));
+        var guid = new GUID(AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(tiles.SubScenes[Random.Range(0, tiles.SubScenes.Count - 1)])));
         roomSet.RequestGeneration(guid, tiles);
     }
 
