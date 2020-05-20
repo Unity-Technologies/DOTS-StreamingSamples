@@ -153,7 +153,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &128985543
 MonoBehaviour:
@@ -169,8 +169,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   autoLODSections: 1
   m_LODParentTransforms:
-  - {fileID: 1671939302}
   - {fileID: 199205426}
+  - {fileID: 1671939302}
 --- !u!205 &128985544
 LODGroup:
   m_ObjectHideFlags: 0
@@ -3153,7 +3153,7 @@ Transform:
   - {fileID: 905800777}
   - {fileID: 1432773695}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1671939303
 MonoBehaviour:
@@ -3198,7 +3198,7 @@ LODGroup:
   m_AnimateCrossFading: 0
   m_LastLODIsBillboard: 0
   m_LODs:
-  - screenRelativeHeight: 0.3057456
+  - screenRelativeHeight: 0.29972842
     fadeTransitionWidth: 0
     renderers:
     - renderer: {fileID: 905800844}
@@ -3260,22 +3260,20 @@ LODGroup:
     - renderer: {fileID: 905800788}
     - renderer: {fileID: 905800787}
     - renderer: {fileID: 905800786}
-    - renderer: {fileID: 0}
     - renderer: {fileID: 905800785}
     - renderer: {fileID: 905800784}
     - renderer: {fileID: 905800783}
     - renderer: {fileID: 905800782}
     - renderer: {fileID: 905800781}
-    - renderer: {fileID: 0}
     - renderer: {fileID: 905800780}
     - renderer: {fileID: 905800779}
     - renderer: {fileID: 905800778}
     - renderer: {fileID: 905800776}
     - renderer: {fileID: 905800775}
-  - screenRelativeHeight: 0.3057456
+  - screenRelativeHeight: 0.0053674434
     fadeTransitionWidth: 0
     renderers: []
-  - screenRelativeHeight: 0.30234674
+  - screenRelativeHeight: 0.0053674434
     fadeTransitionWidth: 0
     renderers: []
   m_Enabled: 1
