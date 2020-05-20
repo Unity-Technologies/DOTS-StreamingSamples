@@ -9,7 +9,7 @@
     "com.unity.ide.vscode": "1.1.4",
     "com.unity.jobs": "file:../dots/Samples/Packages/com.unity.jobs",
     "com.unity.physics": "0.3.1-preview",
-    "com.unity.render-pipelines.high-definition": "9.0.0-preview.15",
+    "com.unity.render-pipelines.high-definition": "9.0.0-preview.13",
     "com.unity.rendering.hybrid": "file:../dots/Samples/Packages/com.unity.rendering.hybrid",
     "com.unity.searcher": "4.0.9",
 	"com.unity.timeline.dots": "0.5.1-preview.2",
@@ -44,6 +44,5 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  },
-  "registry": "https://artifactory.prd.cds.internal.unity3d.com/artifactory/api/npm/upm-candidates"
+  }
 }
