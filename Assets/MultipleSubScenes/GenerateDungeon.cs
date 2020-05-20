@@ -7,23 +7,27 @@ using Random = UnityEngine.Random;
 public class GenerateDungeon : MonoBehaviour
 {
     public DungeonTiles tiles;
-
     private RoomSet roomSet;
-    // Start is called before the first frame update
+    private RoomSetEditor roomSetEditor;
+
     private void Awake()
     {
+#if UNITY_EDITOR
         roomSet = GetComponent<RoomSet>();
         roomSet.LoadTileSet(tiles.SubScenes);
+        roomSetEditor = (RoomSetEditor)EditorWindow.GetWindow(typeof(RoomSetEditor));
+#endif
     }
 
     void Start()
     {
-        var guid = new GUID(AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(tiles.SubScenes[Random.Range(0, tiles.SubScenes.Count - 1)])));
-        roomSet.RequestGeneration(guid, tiles);
-    }
+#if UNITY_EDITOR
+        var tilePath = roomSetEditor.LastEditScene.isLoaded
+            ? roomSetEditor.LastEditScene.path
+            : AssetDatabase.GetAssetPath(tiles.SubScenes[Random.Range(0, tiles.SubScenes.Count - 1)]);
 
-    void OnDestroy()
-    {
-        roomSet.CleanupGeneration();
+        var guid = new GUID(AssetDatabase.AssetPathToGUID(tilePath));
+        roomSet.RequestGeneration(guid, tiles);
+#endif
     }
 }

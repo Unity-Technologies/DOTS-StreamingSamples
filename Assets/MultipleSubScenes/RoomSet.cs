@@ -95,7 +95,10 @@ public class RoomSet : MonoBehaviour
 
     private void OnDestroy()
     {
-        CleanupGeneration();
+#if UNITY_EDITOR
+        if(EditorApplication.isPlaying)
+#endif
+            CleanupGeneration();
 
         foreach (var sceneEntities in SceneEntities)
         {
@@ -113,6 +116,8 @@ public class RoomSetEditor : EditorWindow
 {
     private DungeonTiles _TileSet;
     private const string kTileSetPrefs = "RoomSetEditor._TileSet";
+
+    public Scene LastEditScene => _LastEditScene;
 
     private Scene _LastEditScene;
     private RoomSet _roomSet;
